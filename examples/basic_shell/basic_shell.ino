@@ -1,4 +1,4 @@
-#include <OpenConstructESP32.h>
+#include <openconstruct-esp32.h>
 
 // WiFi credentials - replace with your own
 const char* WIFI_SSID = "your_wifi_ssid";
