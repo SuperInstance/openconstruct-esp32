@@ -18,17 +18,17 @@ Arduino/ESP32 library that lets microcontrollers participate as **Plato shells**
 ```cpp
 #include <openconstruct-esp32.h>
 
-OpenConstructESP32 node("kitchen-sensor");
+OpenConstructESP32 node;
 
 void setup() {
-    node.begin("WiFiSSID", "WiFiPass");
-    node.registerDigitalSensor("door", 4);       // GPIO 4
-    node.registerAnalogSensor("light", 34);      // ADC on GPIO 34
-    node.registerTemperatureSensor("temp", 23);  // DHT22 on GPIO 23
+    node.begin("kitchen-sensor", "WiFiSSID", "WiFiPass");
+    node.registerSensor(4, "door", "digital");          // GPIO 4
+    node.registerSensor(34, "light", "analog");         // ADC on GPIO 34
+    node.registerSensor(23, "temp", "temperature");     // DHT22 on GPIO 23
 }
 
 void loop() {
-    node.loop();  // handles MQTT, mDNS, command parsing, sensor reporting
+    node.update();  // handles MQTT, mDNS, command parsing, sensor reporting
 }
 ```
 
