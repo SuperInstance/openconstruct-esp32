@@ -36,7 +36,8 @@ void OpenConstructESP32::registerSensor(int pin, const char* name, const char* t
     s.lastRead = 0;
 
     // Configure pin based on type
-    String sensorType = String(type).toLowerCase();
+    String sensorType = String(type);
+    sensorType.toLowerCase();
     if (sensorType == "digital") {
         pinMode(pin, INPUT);
     } else if (sensorType == "analog") {
@@ -150,7 +151,8 @@ void OpenConstructESP32::subscribeToCommands() {
 
 void OpenConstructESP32::readSensors() {
     for (auto& sensor : _sensors) {
-        String sensorType = sensor.type.toLowerCase();
+        String sensorType = sensor.type;
+        sensorType.toLowerCase();
         float value = 0.0;
 
         if (sensorType == "digital") {
