@@ -12,7 +12,6 @@ OpenConstructESP32
 
 # PlatformIO
 .travis.yml
-platformio.ini
 
 # Arduino
 *.hex
