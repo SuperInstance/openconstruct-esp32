@@ -91,6 +91,26 @@ void test_gpio_command_format(void) {
     TEST_ASSERT_FALSE(response.indexOf("Invalid write command") >= 0);
 }
 
+// Named write values (on/off, high/low, true/false) must map to the correct
+// level. Previously executeWrite used String::toInt(), which returns 0 for
+// every non-numeric string, so "on"/"high"/"true" silently drove the pin LOW.
+void test_write_named_values(void) {
+    const char* truthy[] = {"on", "high", "true", "1"};
+    const char* falsy[] = {"off", "low", "false", "0"};
+    char cmd[32];
+
+    for (int i = 0; i < 4; i++) {
+        snprintf(cmd, sizeof(cmd), "write 13 %s", truthy[i]);
+        String response = shell->processCommand(cmd);
+        TEST_ASSERT_TRUE_MESSAGE(response.indexOf("HIGH") >= 0, truthy[i]);
+    }
+    for (int i = 0; i < 4; i++) {
+        snprintf(cmd, sizeof(cmd), "write 13 %s", falsy[i]);
+        String response = shell->processCommand(cmd);
+        TEST_ASSERT_TRUE_MESSAGE(response.indexOf("LOW") >= 0, falsy[i]);
+    }
+}
+
 // Test agent name
 void test_agent_name(void) {
     shell->begin("test-agent", "ssid", "pass");
@@ -132,6 +152,7 @@ void setup() {
     RUN_TEST(test_write_missing_value);
     RUN_TEST(test_read_missing_sensor);
     RUN_TEST(test_gpio_command_format);
+    RUN_TEST(test_write_named_values);
     RUN_TEST(test_agent_name);
     RUN_TEST(test_connection_status_initial);
     RUN_TEST(test_status_format);
