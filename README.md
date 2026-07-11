@@ -65,10 +65,12 @@ The included `platformio.ini` defines an `esp32dev` build environment and a `tes
 
 ## How It Fits
 
-In the OpenConstruct fleet topology, ESP32s are intended as the sensor spokes to a Jetson-class hub. The hub side is meant to discover these nodes and represent their capabilities as rooms.
+In the OpenConstruct fleet topology, ESP32s are the sensor spokes to a Jetson-class hub. [openconstruct-jetson](https://github.com/SuperInstance/openconstruct-jetson) is the hub side (GPU-accelerated inference, camera/sonar processing); [plato-fleet](https://github.com/SuperInstance/plato-fleet) discovers ESP32 nodes and represents their capabilities as rooms; see [openconstruct-examples](https://github.com/SuperInstance/openconstruct-examples) for a working sensor-node sketch (`examples/esp32/sensor_node.ino`).
 
 ## Related Repos
 
+- **[openconstruct-jetson](https://github.com/SuperInstance/openconstruct-jetson)** — the GPU-accelerated hub this ESP32 acts as a sensor spoke to.
+- **[plato-fleet](https://github.com/SuperInstance/plato-fleet)** — fleet discovery and topology detection; registers this device as a room-like node.
 - **[plato-edge](https://github.com/SuperInstance/plato-edge)** — the host-side Plato agent runtime; this library exists so an ESP32 can act as a lightweight "Plato shell" reported into that fleet.
 - **[nexus-edge-runtime](https://github.com/SuperInstance/nexus-edge-runtime)** — a heavier edge runtime with fleet coordination, sensor fusion, and a wire protocol, for devices that can run a full agent loop instead of a thin sensor node.
 - **[vessel-bridge](https://github.com/SuperInstance/vessel-bridge)** — another edge bridge between hardware sensors/commands and the fleet; shares the "translate raw GPIO into fleet-meaningful messages" concern.
