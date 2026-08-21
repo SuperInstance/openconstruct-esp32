@@ -192,16 +192,28 @@ String OpenConstructESP32::executeRead(const String& sensorName) {
 
 String OpenConstructESP32::executeWrite(const String& pinStr, const String& valueStr) {
     int pin = pinStr.toInt();
-    int value = valueStr.toInt();
 
     if (pin < 0 || pin > 39) {
         return "ERROR: Invalid pin number";
     }
 
-    pinMode(pin, OUTPUT);
-    digitalWrite(pin, value > 0 ? HIGH : LOW);
+    // Resolve the value to drive HIGH or LOW. The documented interface
+    // (see README and the help text in CommandParser.cpp) accepts named
+    // aliases — on/off, high/low, true/false — in addition to 0/1.
+    //
+    // We must parse these explicitly: String::toInt() returns 0 for *any*
+    // non-numeric input, so relying on it alone would treat "on"/"high"/
+    // "true" as 0 and silently drive the pin LOW.
+    String lower = valueStr;
+    lower.toLowerCase();
+    bool high = (lower == "1" || lower == "on" ||
+                 lower == "high" || lower == "true" ||
+                 valueStr.toInt() > 0);
 
-    return "OK: Pin " + String(pin) + " set to " + String(value > 0 ? "HIGH" : "LOW");
+    pinMode(pin, OUTPUT);
+    digitalWrite(pin, high ? HIGH : LOW);
+
+    return "OK: Pin " + String(pin) + " set to " + String(high ? "HIGH" : "LOW");
 }
 
 String OpenConstructESP32::executePing() {
