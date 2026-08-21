@@ -61,7 +61,7 @@ lib_deps =
     PubSubClient
 ```
 
-The included `platformio.ini` defines an `esp32dev` build environment and a `test` environment (Unity, 14 tests in `test/test_main.cpp`). The [CI workflow](.github/workflows/ci.yml) builds the firmware and compiles the tests on every push.
+The included `platformio.ini` defines an `esp32dev` build environment and a `test` environment (Unity, 15 tests in `test/test_main.cpp`). The [CI workflow](.github/workflows/ci.yml) builds the firmware and compiles the tests on every push.
 
 ## How It Fits
 
