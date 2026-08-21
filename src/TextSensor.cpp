@@ -26,7 +26,8 @@ String describeMotion(float value) {
 }
 
 String describeSensor(const Sensor& sensor) {
-    String sensorType = sensor.type.toLowerCase();
+    String sensorType = sensor.type;
+    sensorType.toLowerCase();
     String description;
 
     if (sensorType == "digital") {
@@ -66,7 +67,8 @@ String formatSensorStatus(const std::vector<Sensor>& sensors) {
 
     String result = "";
     for (const auto& sensor : sensors) {
-        String sensorType = sensor.type.toLowerCase();
+        String sensorType = sensor.type;
+    sensorType.toLowerCase();
         String valueText;
 
         if (sensorType == "digital") {

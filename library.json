@@ -1,0 +1,23 @@
+{
+  "name": "OpenConstructESP32",
+  "version": "0.1.0",
+  "description": "Ultralight ESP32 edge node library for OpenConstruct networks",
+  "keywords": "openconstruct, esp32, mqtt, agent, sensor",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SuperInstance/openconstruct-esp32.git"
+  },
+  "authors": [
+    {
+      "name": "SuperInstance",
+      "email": "dev@superinstance.com"
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/SuperInstance/openconstruct-esp32",
+  "dependencies": {
+    "knolleary/PubSubClient": "^2.8"
+  },
+  "frameworks": "arduino",
+  "platforms": "espressif32"
+}

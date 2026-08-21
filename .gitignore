@@ -11,8 +11,8 @@ OpenConstructESP32
 .libdeps
 
 # PlatformIO
+.pio-venv/
 .travis.yml
-platformio.ini
 
 # Arduino
 *.hex
